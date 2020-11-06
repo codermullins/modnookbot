@@ -2,8 +2,11 @@
 
 Michiel Mulders shows you how to install and set up a new Discord bot, which is made easier thanks to the API offered by the Discord.js package.
 
+<<<<<<< HEAD
 This is the **advanced branch**, demonstrating how to implement a command handler.
 
+=======
+>>>>>>> 691ef36b09cf4df8fdc1f9c427a614b2ca82b493
 Link to article on SitePoint: [https://www.sitepoint.com/discord-bot-node-js/](https://www.sitepoint.com/discord-bot-node-js/)
 
 ## Requirements
