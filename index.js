@@ -1,32 +1,50 @@
-require('dotenv').config();
 const Discord = require('discord.js');
-const bot = new Discord.Client();
-bot.commands = new Discord.Collection();
-const botCommands = require('./commands');
+const fs = require('fs');
+const {TOKEN} = require('./config.js');
+const Enmap = require('enmap');
+const client = new Discord.Client();
+const emoji = require('./resources/emoji');
 
-Object.keys(botCommands).map(key => {
-  bot.commands.set(botCommands[key].name, botCommands[key]);
+client.commands = new Enmap();
+client.emoji = emoji;
+
+fs.readdir('./events/', (err, files) => {
+  if (err) return console.error;
+  files.forEach(file => {
+    if (!file.endsWith('.js')) return;
+    const evt = require(`./events/${file}`);
+    let evtName = file.split('.')[0];
+    console.log(`Loaded '${evtName}'.`);
+    client.on(evtName, evt.bind(null, client));
+  });
 });
 
-const TOKEN = process.env.TOKEN;
+//loads files from the command folder
+fs.readdir('./commands/', (err, folders) => {
+  if (err) {
+    return console.error;
+  }
 
-bot.login(TOKEN);
+  for (let i = 0; i < folders.length; i++) {
+    fs.readdir(`./commands/${folders[i]}/`, (err, files) => {
+      if (err) {
+        return console.error;
+      }
+      files.forEach((file) => {
+        if(!file.endsWith('.js')) {
+          return;
+        }
 
-bot.on('ready', () => {
-  console.info(`Logged in as ${bot.user.tag}!`);
-});
-
-bot.on('message', msg => {
-  const args = msg.content.split(/ +/);
-  const command = args.shift().toLowerCase();
-  console.info(`Called command: ${command}`);
-
-  if (!bot.commands.has(command)) return;
-
-  try {
-    bot.commands.get(command).execute(msg, args);
-  } catch (error) {
-    console.error(error);
-    msg.reply('there was an error trying to execute that command!');
+    let props = require(`./commands/${folders[i]}/${file}`);
+    let cmdName = file.split('.')[0];
+    console.log(`Loaded '${cmdName}'.`);
+    client.commands.set(cmdName, props);
+        
+      });
+    });
   }
 });
+
+
+
+client.login(TOKEN);
