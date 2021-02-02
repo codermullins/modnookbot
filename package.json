@@ -9,7 +9,6 @@
   "author": "Michiel Mulders",
   "license": "ISC",
   "dependencies": {
-<<<<<<< HEAD
     "cheerio": "^1.0.0-rc.3",
     "discord.js": "^12.4.1",
     "dotenv": "^8.2.0",
@@ -23,9 +22,5 @@
   },
   "devDependencies": {
     "eslint": "^7.11.0"
-=======
-    "discord.js": "^11.5.1",
-    "dotenv": "^8.2.0"
->>>>>>> 691ef36b09cf4df8fdc1f9c427a614b2ca82b493
   }
 }

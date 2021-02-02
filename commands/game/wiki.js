@@ -18,6 +18,10 @@ exports.run = async(client, msg, args) => {
     const list = await fetch(`https://api.nookipedia.com/villagers?${query}&${nookLink}`)
     .then(res => res.json());
 
+    if (!list.length){ 
+        return msg.channel.send(`No results found for **${args.join(' ')}**.`);
+    }
+
     let name = list[0].name;
     let species = list[0].species;
     let personality = list[0].personality;
