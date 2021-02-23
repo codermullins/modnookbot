@@ -54,7 +54,7 @@ exports.run = async(client, msg, args) => {
     msg.channel.send(embed);
 };
 
-exports.help = {
+module.exports = {
     name: 'bugs',
     description: 'Gets information about searched bugs',
     usage: '$bugs <name>'

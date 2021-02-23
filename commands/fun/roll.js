@@ -1,4 +1,9 @@
-exports.run = (client, msg, args) => {
+module.exports = {
+    name: 'roll',
+    description: 'Rolls a random number between 1 and the number given',
+    
+
+    run: (client, msg, args) => {
     const input = parseInt(args[0], 10);
 
     if (!input) {
@@ -8,8 +13,7 @@ exports.run = (client, msg, args) => {
     const output = Math.ceil(Math.random() * input);
 
     return msg.channel.send(`${client.emoji.gameDie} **${output}** (1-${input})`);
-};
+},
 
-exports.help = {
-    name: 'roll'
+
 };
