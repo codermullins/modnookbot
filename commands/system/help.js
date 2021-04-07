@@ -88,13 +88,19 @@ module.exports = {
             )
             .addField(
                 'USAGE:',
-                command.usage? `\`${prefix}${command.name} ${command.usage}\``
+                command.usage? `\`${prefix}${command.name}\` ${command.usage}`
                 : `\`${prefix}${command.name}\``
             )
             .addField(
                 'DESCRIPTION:',
                 command.description
                 ? command.description
+                : 'No description for this command.'
+            )
+            .addField(
+                'DETAILS:',
+                command.details
+                ? command.details
                 : 'No description for this command.'
             )
             .setFooter(
