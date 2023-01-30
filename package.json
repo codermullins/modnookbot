@@ -1,27 +1,38 @@
 {
-  "name": "discord-bot",
+  "name": "modnookbot",
   "version": "1.0.0",
-  "description": "Discord bot for SitePoint",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Michiel Mulders",
-  "license": "ISC",
-  "dependencies": {
-    "cheerio": "^1.0.0-rc.3",
-    "discord.js": "^12.4.1",
-    "dotenv": "^8.2.0",
-    "dotenv-flow": "^3.2.0",
-    "enmap": "^5.8.0",
-    "mongoose": "^5.10.9",
-    "node-fetch": "^2.6.1",
-    "querystring": "^0.2.0",
-    "snekfetch": "^4.0.4",
-    "sqlite3": "^5.0.2",
-    "string-similarity": "^4.0.2"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codermullins/modnookbot.git"
   },
-  "devDependencies": {
-    "eslint": "^7.11.0"
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codermullins/modnookbot/issues"
+  },
+  "homepage": "https://github.com/codermullins/modnookbot#readme",
+  "dependencies": {
+    "better-sqlite3": "^8.0.1",
+    "cheerio": "^1.0.0-rc.12",
+    "discord.js": "^12.4.1",
+    "distube": "^4.0.4",
+    "dotenv": "^16.0.3",
+    "dotenv-flow": "^3.2.0",
+    "electron-rebuild": "^3.2.9",
+    "enmap": "^5.8.0",
+    "eslint": "^8.32.0",
+    "googleapis": "^110.0.0",
+    "mongoose": "^6.9.0",
+    "node-fetch": "^2.6.6",
+    "querystring": "^0.2.1",
+    "snekfetch": "^4.0.4",
+    "sqlite3": "^5.1.4",
+    "string-similarity": "^4.0.4",
+    "ytdl-core": "^4.11.2"
   }
 }

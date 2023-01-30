@@ -1,8 +1,8 @@
-const Discord = require('discord.js');
+const discord= require('discord.js');
 const fs = require('fs');
 const {TOKEN} = require('./config.js');
 const Enmap = require('enmap');
-const client = new Discord.Client();
+const client = new discord.Client();
 const emoji = require('./resources/emoji');
 
 client.commands = new Enmap();

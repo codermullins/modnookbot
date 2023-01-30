@@ -4,7 +4,6 @@ module.exports = {
     TOKEN: process.env.TOKEN,
     prefix: process.env.PREFIX,
     nookLink: process.env.NOOKLINK,
-    ffLink: process.env.FFLINK,
 
     //UserDB 
     userDBDefaults: {

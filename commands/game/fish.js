@@ -59,6 +59,7 @@ module.exports = {
             .setFooter('Information Provided by Nookipedia API');
 
         msg.channel.send(embed);
+
     },
 
 

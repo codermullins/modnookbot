@@ -65,6 +65,7 @@ module.exports = {
 
         //sends the embed in chat
         msg.channel.send(embed);
+
     },
 
 

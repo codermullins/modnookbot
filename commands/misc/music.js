@@ -10,10 +10,10 @@ module.exports = {
     name: 'music',
     description: 'moves the bot to play music in the voice channel',
     usage: '<play|skip|stop|queue><song name>',
-    details: '\`<play>\` => Add a song by name to the queue\n' + 
-    '\`<skip>\]\` => Skip the current song\n' +
-    '\`<stop>\` => Delete the current song queue and remove the bot from the voice channel.\n' +
-    '\`<queue>\` => Displays all songs in queue',
+    details: '`<play>` => Add a song by name to the queue\n' + 
+    '`<skip>` => Skip the current song\n' +
+    '`<stop>` => Delete the current song queue and remove the bot from the voice channel.\n' +
+    '`<queue>` => Displays all songs in queue',
     
 
 
@@ -23,7 +23,7 @@ module.exports = {
             msg.channel.send('You need to supply an arg');
             return;
         }
-
+        let queue = client.disTube.getQueue(msg);
         switch (args[0]) {
             case 'play':
                 if (!msg.member.voice.channel){
@@ -44,7 +44,7 @@ module.exports = {
                 client.disTube.skip(msg);
                 break;
             case 'queue':
-                let queue = client.disTube.getQueue(msg);
+                
                 msg.channel.send('Current queue:\n' + queue.songs.map((song, id) =>
                     `**${id + 1}**. ${song.name} - \`${song.formattedDuration}\``).slice(0, 10).join('\n'));
                 break;
