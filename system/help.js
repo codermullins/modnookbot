@@ -2,7 +2,7 @@
 const { MessageEmbed } = require('discord.js');
 const { fs, readdirSync } = require('fs');
 const { fileURLToPath } = require('url');
-const { prefix } = require('../../config.js');
+const { prefix } = require('../config.js');
 
 module.exports = {
     name: 'help',

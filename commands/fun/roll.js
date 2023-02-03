@@ -1,19 +1,30 @@
+const { SlashCommandBuilder } = require("discord.js");
+const emoji = require('../../resources/emoji');
+
 module.exports = {
-    name: 'roll',
-    description: 'Rolls a random number between 1 and the number given',
-    
+    data: new SlashCommandBuilder()
+        .setName('roll')
+        .setDescription('Rolls a random number between 1 and the number given')
+        .addIntegerOption((option) =>
+        option
+          .setName("input")  
+          .setDescription("Integer Input 1 - 99")
+          .setMinValue(1)
+          .setMaxValue(99)
+        ),
 
-    run: (client, msg, args) => {
-    const input = parseInt(args[0], 10);
-
-    if (!input) {
-        return msg.channel.send('Provide a number for the max range');
+    async execute(interaction) {
+        const input = interaction.options.getInteger("input");
+        const output = Math.ceil(Math.random() * input);
+    if (input) {
+        await interaction.reply(`${emoji.gameDie} **${output}** (1-${input})`);
     }
 
-    const output = Math.ceil(Math.random() * input);
+    
 
-    return msg.channel.send(`${client.emoji.gameDie} **${output}** (1-${input})`);
-},
+    
+    // return interaction.reply("Must choose a number from 1- 99!");
+}
 
 
 };

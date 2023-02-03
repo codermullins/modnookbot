@@ -2,8 +2,9 @@ require('dotenv-flow').config();
 
 module.exports = {
     TOKEN: process.env.TOKEN,
-    prefix: process.env.PREFIX,
     nookLink: process.env.NOOKLINK,
+    clientId: process.env.clientId,
+    guildId: process.env.guildId,
 
     //UserDB 
     userDBDefaults: {

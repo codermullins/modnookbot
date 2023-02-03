@@ -17,9 +17,11 @@
   },
   "homepage": "https://github.com/codermullins/modnookbot#readme",
   "dependencies": {
+    "@discordjs/rest": "^1.5.0",
     "better-sqlite3": "^8.0.1",
     "cheerio": "^1.0.0-rc.12",
-    "discord.js": "^12.4.1",
+    "discord-api-types": "^0.37.31",
+    "discord.js": "^14.7.1",
     "distube": "^4.0.4",
     "dotenv": "^16.0.3",
     "dotenv-flow": "^3.2.0",
@@ -28,11 +30,12 @@
     "eslint": "^8.32.0",
     "googleapis": "^110.0.0",
     "mongoose": "^6.9.0",
-    "node-fetch": "^2.6.6",
+    "node-fetch": "^2.6.9",
     "querystring": "^0.2.1",
     "snekfetch": "^4.0.4",
     "sqlite3": "^5.1.4",
     "string-similarity": "^4.0.4",
+    "undici": "^5.16.0",
     "ytdl-core": "^4.11.2"
   }
 }

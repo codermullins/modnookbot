@@ -1,41 +1,29 @@
-const { Message, MessageEmbed } = require('discord.js');
-const { nookLink } = require('../../config.js');
-const fetch = require('node-fetch');
-const querystring = require('querystring');
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const { nookLink } = require("../../config.js");
+const fetch = require("node-fetch");
 
 module.exports = {
-    name: 'recipe',
-    description: 'Gets information about searched bugs',
-    usage: '<name>',
+  data: new SlashCommandBuilder()
+    .setName("recipe")
+    .setDescription("Gets Wiki for a choosen recipe")
+    .addStringOption((option) =>
+      option
+      .setName("name")
+      .setDescription('Name of the recipe you are looking for')),
 
-    run: async (client, msg, args) => {
-
-        //if the user does not display a name
-        if (!args.length) {
-            return msg.channel.send('You need to supply a name');
-
-        }
-
-        //query for innput of recipe
-        const query = querystring.stringify({ name: args.join(' ') });
-        const formatquery = query.slice(5);
+  async execute(interaction) {
+    const nameInput = interaction.options.getString("name");
+    const queryString = new URLSearchParams({ nameInput });
+    const query = queryString.get('nameInput');
 
         //GET the API and Query for NH recipe
-        const list = await fetch(`https://api.nookipedia.com/nh/recipes/${formatquery}?${nookLink}`)
+        const list = await fetch(`https://api.nookipedia.com/nh/recipes/${query}?${nookLink}`)
             .then(res => res.json());
-
-
-        if (!list.name) {
-            return msg.channel.send(`No results found for **${formatquery}**.`);
-        }
-
-        let name = list.name;
-
-
-
+            
+            let name = list.name;
 
         //embed format for display
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setTitle(name)
             .setURL(list.url)
             .setThumbnail(list.image_url);
@@ -46,11 +34,9 @@ module.exports = {
         embed.addFields(
             { name: '\u200B', value: '\u200B' }
         )
-            .addField('For more information click here', list.url)
-            .setFooter('Information Provided by Nookipedia API');
-
-        msg.channel.send(embed);
-    },
-
-
+            .addFields({ name: 'For more information click here', value: list.url })
+            .setFooter({ text: 'Information Provided by Nookipedia API' });
+    await interaction.reply({ embeds: [embed] });
+  },
 };
+

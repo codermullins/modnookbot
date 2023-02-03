@@ -1,33 +1,25 @@
-const { Message, MessageEmbed } = require('discord.js');
-const { nookLink } = require('../../config.js');
-const fetch = require('node-fetch');
-const querystring = require('querystring');
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const { nookLink } = require("../../config.js");
+const fetch = require("node-fetch");
 
 module.exports = {
-    name: 'sea',
-    description: 'Gets information about searched sea creatures',
-    usage: '<name>',
+  data: new SlashCommandBuilder()
+    .setName("sea")
+    .setDescription("Gets Wiki for a Chosen sea creature")
+    .addStringOption((option) => 
+    option
+    .setName('name')
+    .setDescription('Name of the Sea Creature')),
 
-    run: async (client, msg, args) => {
+  async execute(interaction) {
+    const nameInput = interaction.options.getString("name");
+    const queryString = new URLSearchParams({ nameInput });
+    const query = queryString.get('nameInput');
 
-        //if the user does not display a name
-        if (!args.length) {
-            return msg.channel.send('You need to supply a name');
-
-        }
-
-        //query for innput of sea creatures
-        const query = querystring.stringify({ name: args.join(' ') });
-        const formatquery = query.slice(5);
-
-        //GET the API and Query for NH sea creatures
-        const list = await fetch(`https://api.nookipedia.com/nh/sea/${formatquery}?${nookLink}`)
+            //GET the API and Query for NH sea creatures
+        const list = await fetch(`https://api.nookipedia.com/nh/sea/${query}?${nookLink}`)
             .then(res => res.json());
 
-
-        if (!list.name) {
-            return msg.channel.send(`No results found for **${formatquery}**.`);
-        }
 
         let name = list.name;
         let shadow = list.shadow_size;
@@ -39,7 +31,7 @@ module.exports = {
 
 
         //embed format for display
-        const embed = new MessageEmbed()
+        const embed = new EmbedBuilder()
             .setTitle(name)
             .setURL(list.url)
             .setThumbnail(list.image_url)
@@ -54,11 +46,16 @@ module.exports = {
                 { name: 'Times Avalible South', value: list.south.availability_array[i].months + "\n" + list.south.availability_array[i].time, inline: false },
                 { name: '\u200B', value: '\u200B' });
         }
-        embed.addField('For more information click here', list.url)
-            .setFooter('Information Provided by Nookipedia API');
-
-        msg.channel.send(embed);
-    },
+        embed.addFields({ name: 'For more information click here', value: list.url })
+            .setFooter({ text: 'Information Provided by Nookipedia API' });
 
 
+
+
+    await interaction.reply({ embeds: [embed]});
+  },
 };
+
+
+
+
